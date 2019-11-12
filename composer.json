@@ -1,0 +1,34 @@
+{
+	"name" : "kittools/course",
+	"description" : "course",
+	"keywords" : [
+		"course"
+	],
+	"type" : "library",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "yanfeng1012",
+			"email" : "wyf930102@gmail.com",
+			"homepage" : "https://github.com/yanfeng1012"
+		}
+	],
+	"support" : {
+		"email" : "wyf930102@gmail.com"
+	},
+	"require" : {
+		"php" : "^7.2",
+		"doctrine/doctrine-bundle" : "^1.11",
+		"doctrine/orm" : "^2.5"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "^7.0",
+		"doctrine/cache" : "^1.0",
+		"symfony/cache" : "^3.1|^4.0",
+		"doctrine/coding-standard" : "^4.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Metadata\\" : "src/"
+		}
+	}
+}

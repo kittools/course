@@ -1,0 +1,4 @@
+services:
+    kittools_course.course:
+        class: Kittools\Course\Service\course
+        arguments: ["@doctrine"]
