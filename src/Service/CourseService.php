@@ -34,14 +34,21 @@ class CourseService
     {
         self::$class = $class;
         $isOccupy = self::isOccupy($params);
-        if (! empty($isOccupy)) {
+
+        // 无占用情况 可以排课
+        if (empty($isOccupy)) {
+            $course = new $class();
+            // do someting for course
+            $this->em->persist($course);
+            $this->em->flush();
             return [
-                'code' => 0,
-                'msg' => $isOccupy
+                'code' => 1,
+                'msg' => '排课成功'
             ];
         } else {
             return [
-                'code' => 1
+                'code' => 0,
+                'msg' => $isOccupy
             ];
         }
     }
@@ -82,8 +89,9 @@ class CourseService
     /**
      * 判断当前时间教师是否有课
      *
-     * @param array $teacher
-     * @param unknown $time
+     * @param int $teacher
+     * @param string $time
+     * @return string|boolean
      */
     protected static function isOccupyTeacher(int $teacher, string $time)
     {
@@ -98,9 +106,9 @@ class CourseService
     /**
      * 判断当前时间班级是否有课
      *
-     * @param unknown $class
-     * @param unknown $teacher
-     * @param unknown $time
+     * @param int $class
+     * @param string $time
+     * @return string|boolean
      */
     protected static function isOccupyClass(int $class, string $time)
     {
@@ -119,6 +127,6 @@ class CourseService
      */
     protected function getRepo()
     {
-        return $this->doctrine->getRepository(static::$class::class);
+        return $this->doctrine->getRepository(static::$class);
     }
 }
