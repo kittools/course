@@ -38,7 +38,12 @@ class CourseService
         // 无占用情况 可以排课
         if (empty($isOccupy)) {
             $course = new $class();
-            // do someting for course
+            foreach ($params as $key => $val) {
+                $method = 'set' . ucwords($key, '_');
+                if (method_exists($course, $method)) {
+                    $course->$method($val);
+                }
+            }
             $this->em->persist($course);
             $this->em->flush();
             return [
